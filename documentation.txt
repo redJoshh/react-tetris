@@ -43,5 +43,5 @@ The Fix is simple, just call the startGame not as a function.
   - Keys will work after clicking start game button using the useRef and .focus()
 
   Problem 3: Double Spawns
-  The resetPlayer() function is being rendered repeatedly, which spawns a new tetromino every rerender.
-  The immediate fix is the sweeping of rows and updating the stage is functional by adding stricter conditions.
+  With the hard drop, the timer doesn't reset which results to double spawning of tetrominos.
+  Fix: Reset the timer for hard drops
