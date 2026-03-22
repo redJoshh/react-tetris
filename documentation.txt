@@ -34,3 +34,10 @@ The Fix is simple, just call the startGame not as a function.
 
   First, the updatePlayerPos had simple syntax problem where it should be + not +=. This resulted to more tetrominos being added
   Second,  the forEach had too many spaces in the backticks syntax, which resulted to reading as "    clear    " not "clear".
+
+
+
+  Modification 1: Added Hard Drop
+  - Created a hard drop function that is utilized by the keyboard (32)
+  - onFocus issues with the start button and space bar also fixed with .blur()
+  - Keys will work after clicking start game button using the useRef and .focus()
