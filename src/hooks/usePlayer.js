@@ -30,7 +30,7 @@ export const usePlayer = () => {
       clonePlayer.pos.x += offset;
       offset = -(offset + (offset > 0 ? 1 : -1));
       if (offset > clonePlayer.tetromino[0].length) {
-        rotate(clonePlayer.tetromino, -dir);
+        clonePlayer.tetromino = rotate(clonePlayer.tetromino, -dir);
         clonePlayer.pos.x = pos;
         return;
       }
