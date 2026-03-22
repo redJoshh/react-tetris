@@ -1,4 +1,36 @@
 Problem 1: Too Many Re-renders (2:35 pm/ March 22)
  <StartButton onClick={startGame ()} /> caused the error as react immediately executes the function which causes the website to re-render multiple times, eventually crashing immediately
-
+The Fix is simple, just call the startGame not as a function.
  Fix:  <StartButton onClick={startGame} />
+
+ Problem 2: Tetrominos Smearing (3:04/ March 22)
+ Instead of the Tetrominos moving from left or right, it was adding or smearing more tetrominos within the grid.
+ The issue resides in:
+
+ 
+      //Draw the tetromino
+      player.tetromino.forEach((row, y) => {
+        row.forEach((value, x) => {
+          if (value !== 0) {
+            newStage[y + player.pos.y][x + player.pos.x] = [
+              value,
+              `
+              ${player.collided ? "merged" : "clear"}
+              `,
+            ];
+          }
+        });
+      });
+
+        const updatePlayerPos = ({ x, y, collided }) => {
+    setPlayer((prev) => ({
+      ...prev,
+      pos: { x: (prev.pos.x += x), y: (prev.pos.y += y) },
+      collided,
+    }));
+  };
+
+
+
+  First, the updatePlayerPos had simple syntax problem where it should be + not +=. This resulted to more tetrominos being added
+  Second,  the forEach had too many spaces in the backticks syntax, which resulted to reading as "    clear    " not "clear".
