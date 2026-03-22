@@ -1,0 +1,4 @@
+Problem 1: Too Many Re-renders (2:35 pm/ March 22)
+ <StartButton onClick={startGame ()} /> caused the error as react immediately executes the function which causes the website to re-render multiple times, eventually crashing immediately
+
+ Fix:  <StartButton onClick={startGame} />
