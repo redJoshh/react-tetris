@@ -41,3 +41,7 @@ The Fix is simple, just call the startGame not as a function.
   - Created a hard drop function that is utilized by the keyboard (32)
   - onFocus issues with the start button and space bar also fixed with .blur()
   - Keys will work after clicking start game button using the useRef and .focus()
+
+  Problem 3: Double Spawns
+  The resetPlayer() function is being rendered repeatedly, which spawns a new tetromino every rerender.
+  The immediate fix is the sweeping of rows and updating the stage is functional by adding stricter conditions.
