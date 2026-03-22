@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 import { createStage } from "../gamehelpers";
 
 export const useStage = (player, resetPlayer) => {
@@ -8,6 +7,8 @@ export const useStage = (player, resetPlayer) => {
 
   useEffect(() => {
     setRowsCleared(0);
+
+    let spawnTimeout;
 
     const sweepRows = (newStage) =>
       newStage.reduce((ack, row) => {
@@ -25,7 +26,6 @@ export const useStage = (player, resetPlayer) => {
 
     const updateStage = (prevStage) => {
       // Flush the stage
-
       const newStage = prevStage.map((row) =>
         row.map((cell) => (cell[1] === "clear" ? [0, "clear"] : cell)),
       );
@@ -47,15 +47,23 @@ export const useStage = (player, resetPlayer) => {
         });
       });
 
-      //Check collision
       if (player.collided) {
-        resetPlayer();
         return sweepRows(newStage);
       }
       return newStage;
     };
 
     setStage((prev) => updateStage(prev));
+
+    if (player.collided) {
+      spawnTimeout = setTimeout(() => {
+        resetPlayer();
+      }, 100);
+    }
+
+    return () => {
+      clearTimeout(spawnTimeout);
+    };
   }, [player, resetPlayer]);
 
   return [stage, setStage, rowsCleared];
