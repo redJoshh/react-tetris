@@ -77,8 +77,6 @@ const Tetris = () => {
     }
 
     updatePlayerPos({ x: 0, y: potY, collided: true });
-
-    setDropTime(1000 / (level + 1) + 200);
   };
 
   const keyUp = ({ keyCode }) => {
